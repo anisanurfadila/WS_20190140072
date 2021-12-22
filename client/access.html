@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>DATA MAHASISWA</title>
+</head>
+<body>
+
+
+    <table class="table table-striped">
+        <tr class="bg-info">
+            <th>NIM</th>
+            <th>Nama</th>
+            <th>Alamat</th>
+            <th>Program Studi</th>
+            <th>Fakultas</th>
+        </tr>
+
+        <tbody id="data"></tbody>
+
+    </table>
+
+
+
+    <script src="jquery.js"></script>
+
+
+
+
+    <script>
+        fetch("http://localhost:8080/listjson").then(
+                res=>{
+                    res.json().then(
+                        data=>{
+                            console.log(data);
+
+                            if(data.length>0){
+                                var temp = "";
+                                data.forEach((u)=>{
+                                    temp +="<tr>";
+                                    temp +="<td>"+u.nim+"</td>";
+                                    temp +="<td>"+u.nama+"</td>";
+                                    temp +="<td>"+u.alamat+"</td>";
+                                    temp +="<td>"+u.programstudi+"</td>";
+                                    temp +="<td>"+u.fakultas+"</td>";
+                                })
+
+                                document.getElementById("data").innerHTML = temp;
+                            }
+                        }
+                    )
+                }
+        )
+
+
+
+    </script>
+</body>
+</html>
